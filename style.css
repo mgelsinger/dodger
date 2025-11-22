@@ -1,0 +1,321 @@
+:root {
+    /* Default NEON Theme */
+    --bg-color: #0f172a;
+    --bg-gradient: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    --text-color: #f8fafc;
+    --accent-color: #38bdf8;
+    --danger-color: #f43f5e;
+    --powerup-color: #fbbf24;
+    --hud-bg: rgba(15, 23, 42, 0.8);
+    --font-main: 'Outfit', sans-serif;
+    --glow: 0 0 20px;
+}
+
+/* CLASSIC Theme Overrides */
+body.theme-classic {
+    --bg-color: #e2e8f0;
+    --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+    --text-color: #1e293b;
+    --accent-color: #2563eb;
+    --danger-color: #dc2626;
+    --powerup-color: #d97706;
+    --hud-bg: rgba(255, 255, 255, 0.8);
+    --glow: 0 0 0;
+    /* No glow in classic */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-gradient);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Darkness Event Overlay */
+#darkness-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 90%), transparent 100px, rgba(0, 0, 0, 0.95) 300px);
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.5s;
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    padding: 20px;
+}
+
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.hud-group {
+    text-align: center;
+    background: var(--hud-bg);
+    padding: 10px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+}
+
+.hud-label {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.hud-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.hud-sub {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+#powerup-list {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.powerup-badge {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    border-left: 4px solid var(--powerup-color);
+    animation: slideIn 0.3s ease-out;
+}
+
+#event-banner {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--danger-color);
+    text-shadow: 0 0 20px var(--danger-color);
+    animation: pulse 1s infinite;
+}
+
+/* Menus & Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    transition: opacity 0.3s;
+}
+
+.title {
+    font-size: 4rem;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, var(--accent-color), #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(var(--glow) var(--accent-color));
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 300px;
+}
+
+button {
+    background: linear-gradient(135deg, var(--accent-color), #2563eb);
+    border: none;
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+button.secondary-btn {
+    background: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+}
+
+button.toggle-btn {
+    width: 150px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.settings-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Achievements */
+#achievements-list {
+    width: 80%;
+    max-width: 600px;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 2rem;
+}
+
+.achievement-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+.achievement-item.unlocked {
+    border-color: var(--powerup-color);
+    background: rgba(251, 191, 36, 0.1);
+}
+
+.achievement-item h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.achievement-item p {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Toast */
+#toast {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--powerup-color);
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    z-index: 100;
+    animation: slideUp 0.5s ease-out;
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+.danger-text {
+    color: var(--danger-color);
+    text-shadow: 0 0 20px var(--danger-color);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}

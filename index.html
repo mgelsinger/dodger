@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dodge the Blocks: Evolved</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="game-container">
+        <!-- Canvas Layer -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Darkness Overlay (for special event) -->
+        <div id="darkness-overlay" class="hidden"></div>
+
+        <!-- HUD -->
+        <div id="hud" class="hidden">
+            <div class="hud-top">
+                <div class="hud-group">
+                    <div class="hud-label">SCORE</div>
+                    <div class="hud-value" id="score">0</div>
+                </div>
+                <div class="hud-group">
+                    <div class="hud-label">LEVEL</div>
+                    <div class="hud-value" id="level">1</div>
+                </div>
+                <div class="hud-group">
+                    <div class="hud-label">COMBO</div>
+                    <div class="hud-value" id="combo">x0</div>
+                    <div class="hud-sub" id="multiplier">1.0x</div>
+                </div>
+            </div>
+
+            <!-- Active Powerups List -->
+            <div id="powerup-list"></div>
+
+            <!-- Event Banner -->
+            <div id="event-banner" class="hidden">METEOR SHOWER</div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="overlay">
+            <h1 class="title">DODGE<br>THE BLOCKS</h1>
+            <div class="menu-buttons">
+                <button id="btn-start">PLAY GAME</button>
+                <button id="btn-settings">SETTINGS</button>
+                <button id="btn-achievements">ACHIEVEMENTS</button>
+            </div>
+            <div id="high-score-display">High Score: 0</div>
+        </div>
+
+        <!-- Settings Menu -->
+        <div id="settings-menu" class="overlay hidden">
+            <h2>SETTINGS</h2>
+            <div class="settings-group">
+                <label>Theme</label>
+                <button id="btn-toggle-theme" class="toggle-btn">NEON</button>
+            </div>
+            <div class="settings-group">
+                <label>Difficulty</label>
+                <button id="btn-toggle-difficulty" class="toggle-btn">NORMAL</button>
+            </div>
+            <div class="settings-group">
+                <label>Sound</label>
+                <button id="btn-toggle-sound" class="toggle-btn">ON</button>
+            </div>
+            <div class="settings-group">
+                <label>Particles</label>
+                <button id="btn-toggle-particles" class="toggle-btn">HIGH</button>
+            </div>
+            <button id="btn-back-settings" class="secondary-btn">BACK</button>
+        </div>
+
+        <!-- Achievements Menu -->
+        <div id="achievements-menu" class="overlay hidden">
+            <h2>ACHIEVEMENTS</h2>
+            <div id="achievements-list">
+                <!-- Populated by JS -->
+            </div>
+            <button id="btn-back-achievements" class="secondary-btn">BACK</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="overlay hidden">
+            <h1 class="danger-text">GAME OVER</h1>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="label">SCORE</div>
+                    <div class="value" id="go-score">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">BEST</div>
+                    <div class="value" id="go-best">0</div>
+                </div>
+            </div>
+            <div class="menu-buttons">
+                <button id="btn-restart">TRY AGAIN</button>
+                <button id="btn-menu">MAIN MENU</button>
+            </div>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="pause-screen" class="overlay hidden">
+            <h1>PAUSED</h1>
+            <button id="btn-resume">RESUME</button>
+            <button id="btn-quit">QUIT</button>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="hidden">Achievement Unlocked!</div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
